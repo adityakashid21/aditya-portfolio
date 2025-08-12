@@ -92,17 +92,7 @@ const HeroAdvanced: React.FC = () => {
     };
   }, []);
 
-  const textVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        ease: "easeOut"
-      }
-    }
-  };
+  // Animation variants for buttons
 
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },

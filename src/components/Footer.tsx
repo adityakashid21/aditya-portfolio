@@ -5,13 +5,6 @@ import './Footer.css';
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
-  const socialLinks = [
-    { name: 'GitHub', icon: '🐙', href: '#', color: '#333' },
-    { name: 'LinkedIn', icon: '💼', href: '#', color: '#0077b5' },
-    { name: 'WhatsApp', icon: '💬', href: 'https://wa.me/919881891277', color: '#25d366' },
-    { name: 'Email', icon: '📧', href: 'mailto:aadityakashid21@gmail.com', color: '#ea4335' }
-  ];
-
   const quickLinks = [
     { name: 'Home', href: '#home', icon: '🏠' },
     { name: 'About', href: '#about', icon: '👨‍💻' },
