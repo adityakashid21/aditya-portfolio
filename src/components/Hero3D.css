@@ -1,0 +1,227 @@
+.hero-3d {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.hero-3d-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-3d-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.hero-3d-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-3d-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-shadow: 0 0 30px rgba(100, 255, 218, 0.5);
+  letter-spacing: -0.02em;
+}
+
+.highlight-3d {
+  background: linear-gradient(45deg, #64ffda, #00bcd4, #64ffda);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-3d-subtitle {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: #64ffda;
+  position: relative;
+}
+
+.typing-text {
+  position: relative;
+  display: inline-block;
+}
+
+.typing-text::after {
+  content: '|';
+  position: absolute;
+  right: -10px;
+  color: #64ffda;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.hero-3d-description {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-3d-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-3d {
+  position: relative;
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: 2px solid transparent;
+  backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+.btn-3d span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-3d-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-3d:hover .btn-3d-glow {
+  transform: translateX(100%);
+}
+
+.btn-primary-3d {
+  background: linear-gradient(135deg, #64ffda, #00bcd4);
+  color: #0a0a0a;
+  box-shadow: 0 8px 32px rgba(100, 255, 218, 0.3);
+}
+
+.btn-primary-3d:hover {
+  box-shadow: 0 12px 48px rgba(100, 255, 218, 0.5);
+  transform: translateY(-3px);
+}
+
+.btn-secondary-3d {
+  background: rgba(255, 255, 255, 0.1);
+  color: #64ffda;
+  border: 2px solid #64ffda;
+  box-shadow: 0 8px 32px rgba(100, 255, 218, 0.1);
+}
+
+.btn-secondary-3d:hover {
+  background: rgba(100, 255, 218, 0.1);
+  box-shadow: 0 12px 48px rgba(100, 255, 218, 0.3);
+  transform: translateY(-3px);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.scroll-arrow {
+  font-size: 2rem;
+  color: #64ffda;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-arrow:hover {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-3d-content {
+    padding: 0 1rem;
+  }
+  
+  .hero-3d-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .btn-3d {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Glass morphism effects */
+.hero-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 80%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(0, 188, 212, 0.1) 0%, transparent 50%);
+  z-index: 0;
+}
+
+/* Animated background elements */
+.hero-3d::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(100, 255, 218, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 188, 212, 0.05) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(1deg); }
+  66% { transform: translateY(20px) rotate(-1deg); }
+}
