@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaGraduationCap, FaChalkboardTeacher, FaHandshake, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { MdRestaurant, MdFitnessCenter } from 'react-icons/md';
+import { MdRestaurant, MdFitnessCenter, MdFastfood } from 'react-icons/md';
 import './ProjectsAdvanced.css';
 
 // Icon wrapper components to satisfy TypeScript
@@ -12,6 +12,7 @@ const ChalkboardTeacherIcon = () => <FaChalkboardTeacher />;
 const HandshakeIcon = () => <FaHandshake />;
 const RestaurantIcon = () => <MdRestaurant />;
 const FitnessIcon = () => <MdFitnessCenter />;
+const FastfoodIcon = () => <MdFastfood />;
 
 interface Project {
   title: string;
@@ -31,6 +32,23 @@ const ProjectsAdvanced: React.FC = () => {
   });
 
   const projects: Project[] = [
+    {
+      title: 'Samir Food',
+      description: 'Modern food delivery and restaurant website with online ordering system, menu showcase, and customer reviews. Features responsive design and smooth user experience.',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Responsive'],
+      gradient: 'linear-gradient(to bottom right, #f97316, #ea580c)',
+      appIcon: <FastfoodIcon />,
+      github: 'https://github.com/adityakashid21/samirfood',
+      demo: 'https://samirfood-jdqqtehpf-adityakashid21s-projects.vercel.app/',
+      screenContent: (
+        <div className="app-screen-mockup samirfood-mockup">
+          <div className="mockup-header">Samir Food</div>
+          <div className="mockup-row short"></div>
+          <div className="mockup-card"></div>
+          <div className="mockup-row long"></div>
+        </div>
+      )
+    },
     {
       title: 'Elite Cafes & Hotels',
       description: 'A premium hospitality website featuring a complete booking system, testimonials, and responsive design. Built with React, TypeScript, and Tailwind CSS for modern user experience.',
