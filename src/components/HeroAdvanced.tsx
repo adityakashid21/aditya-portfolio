@@ -1,189 +1,178 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Float, Text, Html, Stars, Sparkles } from '@react-three/drei';
 import { motion } from 'framer-motion';
+import * as THREE from 'three';
 import './HeroAdvanced.css';
 
+// 3D Phone Component
+const MobilePhone = (props: any) => {
+  const group = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (group.current) {
+      group.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.2;
+    }
+  });
+
+  return (
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <group ref={group} {...props} dispose={null}>
+        {/* Phone Body */}
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[3, 6, 0.3]} />
+          <meshStandardMaterial color="#1e293b" roughness={0.1} metalness={0.8} />
+        </mesh>
+
+        {/* Screen */}
+        <mesh position={[0, 0, 0.16]}>
+          <planeGeometry args={[2.8, 5.8]} />
+          <meshBasicMaterial color="#000000" />
+        </mesh>
+
+        {/* Dynamic Screen Content - Simulating App Interface */}
+        <group position={[0, 0, 0.17]}>
+          {/* Header Bar */}
+          <mesh position={[0, 2.6, 0]}>
+            <planeGeometry args={[2.8, 0.5]} />
+            <meshBasicMaterial color="#38bdf8" />
+          </mesh>
+
+          {/* App Icons Grid */}
+          {[-0.8, 0, 0.8].map((x, i) => (
+            <group key={i} position={[x, 1.5, 0]}>
+              <mesh>
+                <planeGeometry args={[0.6, 0.6]} />
+                <meshBasicMaterial color="#334155" />
+              </mesh>
+            </group>
+          ))}
+          {[-0.8, 0, 0.8].map((x, i) => (
+            <group key={i} position={[x, 0.5, 0]}>
+              <mesh>
+                <planeGeometry args={[0.6, 0.6]} />
+                <meshBasicMaterial color="#334155" />
+              </mesh>
+            </group>
+          ))}
+
+          {/* "Hello" Text acting as App content */}
+          <Html transform position={[0, -1, 0]} scale={0.5} style={{ pointerEvents: 'none' }}>
+            <div style={{
+              color: 'white',
+              textAlign: 'center',
+              fontFamily: 'Inter',
+              width: '200px'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '24px' }}>Aditya.dev</h3>
+              <p style={{ margin: 0, opacity: 0.7 }}>Mobile Architect</p>
+              <div style={{ marginTop: '20px', display: 'flex', gap: '5px', justifyContent: 'center' }}>
+                <span style={{ fontSize: '20px' }}>⚛️</span>
+                <span style={{ fontSize: '20px' }}>📱</span>
+                <span style={{ fontSize: '20px' }}>🚀</span>
+              </div>
+            </div>
+          </Html>
+        </group>
+
+        {/* Camera Bump */}
+        <mesh position={[0, 2.5, -0.2]}>
+          <boxGeometry args={[1, 1, 0.1]} />
+          <meshStandardMaterial color="#0f172a" />
+        </mesh>
+      </group>
+    </Float>
+  );
+};
+
 const HeroAdvanced: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Particle system
-    const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      opacity: number;
-    }> = [];
-
-    // Create particles
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-      });
-    }
-
-    // Animation loop
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw particles
-      particles.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
-
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(100, 255, 218, ${particle.opacity})`;
-        ctx.fill();
-      });
-
-      // Draw connections
-      particles.forEach((particle, i) => {
-        particles.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(100, 255, 218, ${0.1 * (1 - distance / 100)})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        });
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-    };
-  }, []);
-
-  // Animation variants for buttons
-
-  const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        delay: 0.5,
-        ease: "easeOut"
-      }
-    }
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({
+      x: (e.clientX / window.innerWidth) * 2 - 1,
+      y: -(e.clientY / window.innerHeight) * 2 + 1,
+    });
   };
 
   return (
-    <section id="home" className="hero-advanced">
-      <canvas ref={canvasRef} className="hero-canvas" />
-      
-      <div className="hero-advanced-content">
-        <div className="container">
-          <motion.div 
-            className="hero-text"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <motion.h1 
-              className="hero-title"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Hi, I'm <span className="highlight-advanced">Aditya Kashid</span>
-            </motion.h1>
-            
+    <section id="home" className="hero-advanced" onMouseMove={handleMouseMove}>
+      <div className="canvas-container">
+        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#38bdf8" />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#818cf8" />
 
-            <motion.div className="hero-advanced-subtitle">
-              <span className="typing-text-advanced">IT Engineer | B.Tech Student | React Native Developer</span>
-            </motion.div>
-            
-            <motion.p className="hero-advanced-description">
-              I'm an IT Engineer and B.Tech student specializing in React Native app development. I create 
-              cross-platform mobile applications, intelligent automation workflows with n8n, and integrate 
-              AI/ML solutions. Currently based in Surat, Gujarat, with roots in Nashik, Maharashtra.
-            </motion.p>
-            
-            <motion.div 
-              className="hero-advanced-buttons"
-              variants={buttonVariants}
-              initial="hidden"
-              animate="visible"
+          <Suspense fallback={null}>
+            <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+            <Sparkles count={50} scale={10} size={4} speed={0.4} opacity={0.5} color="#38bdf8" />
+            <MobilePhone rotation={[0, -0.5, 0]} position={[2, 0, 0]} />
+          </Suspense>
+
+          <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+        </Canvas>
+      </div>
+
+      <div className="hero-advanced-content layout-3d">
+        <div className="container">
+          <div className="hero-grid">
+            <motion.div
+              className="hero-text-content"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
             >
-              <motion.a 
-                href="#projects" 
-                className="btn-advanced btn-primary-advanced"
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>Explore My Work</span>
-                <div className="btn-glow-advanced"></div>
-              </motion.a>
-              
-              <motion.a 
-                href="#contact" 
-                className="btn-advanced btn-secondary-advanced"
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>Get In Touch</span>
-                <div className="btn-glow-advanced"></div>
-              </motion.a>
+              <div className="badge-container">
+                <span className="hero-badge">IT Engineering Student</span>
+              </div>
+
+              <h1 className="hero-title">
+                ADITYA KASHID <br />
+                <span className="gradient-text-hero">React Native Developer</span>
+              </h1>
+
+              <p className="hero-description">
+                Specializing in building practical, production-style mobile applications.
+                Passionate about solving real-world problems through clean UI, structured logic,
+                and reliable system design.
+                <br /><br />
+                <strong>Current:</strong> Surat, Gujarat | <strong>From:</strong> Nashik, Maharashtra
+              </p>
+
+              <div className="hero-cta-group">
+                <motion.a
+                  href="#projects"
+                  className="btn-primary-hero"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View My Portfolio
+                </motion.a>
+                <motion.a
+                  href="#contact"
+                  className="btn-secondary-hero"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Download CV
+                </motion.a>
+              </div>
+
+              <div className="tech-stack-mini">
+                <span>React Native</span>
+                <span className="dot">•</span>
+                <span>TypeScript</span>
+                <span className="dot">•</span>
+                <span>Firebase</span>
+                <span className="dot">•</span>
+                <span>n8n</span>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
-      
-      <div className="scroll-indicator-advanced">
-        <motion.div 
-          className="scroll-arrow-advanced"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          ↓
-        </motion.div>
-      </div>
 
-      <div className="floating-shapes">
-        <div className="shape shape-1"></div>
-        <div className="shape shape-2"></div>
-        <div className="shape shape-3"></div>
-      </div>
+      <div className="bg-gradient-orb"></div>
     </section>
   );
 };

@@ -24,7 +24,7 @@ const SkillCube: React.FC<SkillCubeProps> = ({ position, skill, isVisible }) => 
     if (meshRef.current && isVisible) {
       meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
       meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5 + position[1]) * 0.3;
-      
+
       if (hovered) {
         meshRef.current.scale.setScalar(1.2);
       } else {
@@ -50,7 +50,7 @@ const SkillCube: React.FC<SkillCubeProps> = ({ position, skill, isVisible }) => 
             emissiveIntensity={hovered ? 0.3 : 0.1}
           />
         </Box>
-        
+
         <Text
           position={[0, 1.5, 0]}
           fontSize={0.3}
@@ -61,7 +61,7 @@ const SkillCube: React.FC<SkillCubeProps> = ({ position, skill, isVisible }) => 
         >
           {skill.name}
         </Text>
-        
+
         <Text
           position={[0, -1.5, 0]}
           fontSize={0.25}
@@ -135,7 +135,7 @@ const Skills3D: React.FC = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
@@ -154,9 +154,9 @@ const Skills3D: React.FC = () => {
           <ambientLight intensity={0.4} />
           <pointLight position={[10, 10, 10]} intensity={1} />
           <pointLight position={[-10, -10, -10]} color="#64ffda" intensity={0.5} />
-          
+
           <SkillOrbit skills={skills} isVisible={inView} />
-          
+
           <OrbitControls
             enableZoom={false}
             enablePan={false}

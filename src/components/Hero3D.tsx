@@ -7,7 +7,7 @@ import './Hero3D.css';
 
 const AnimatedSphere: React.FC = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-  
+
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime) * 0.3;
@@ -32,16 +32,16 @@ const AnimatedSphere: React.FC = () => {
 
 const Particles3D: React.FC = () => {
   const pointsRef = useRef<THREE.Points>(null);
-  
+
   const particlesPosition = React.useMemo(() => {
     const positions = new Float32Array(2000 * 3);
-    
+
     for (let i = 0; i < 2000; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 10;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
     }
-    
+
     return positions;
   }, []);
 
@@ -70,7 +70,7 @@ const Particles3D: React.FC = () => {
 const Hero3D: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const textVariants = {
+  const textVariants: any = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
@@ -82,7 +82,7 @@ const Hero3D: React.FC = () => {
     }
   };
 
-  const buttonVariants = {
+  const buttonVariants: any = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
@@ -114,7 +114,7 @@ const Hero3D: React.FC = () => {
           <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} autoRotate autoRotateSpeed={0.5} />
         </Canvas>
       </div>
-      
+
       <div className="hero-3d-content">
         <div className="container">
           <motion.div
@@ -126,24 +126,24 @@ const Hero3D: React.FC = () => {
             <motion.h1 className="hero-3d-title">
               Hi, I'm <span className="highlight-3d">Aditya</span>
             </motion.h1>
-            
+
             <motion.div className="hero-3d-subtitle">
               <span className="typing-text">Full Stack Developer</span>
             </motion.div>
-            
+
             <motion.p className="hero-3d-description">
               Creating immersive digital experiences with cutting-edge technologies.
               Passionate about 3D web development, AI integration, and innovative user interfaces.
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               className="hero-3d-buttons"
               variants={buttonVariants}
               initial="hidden"
               animate="visible"
             >
-              <motion.a 
-                href="#projects" 
+              <motion.a
+                href="#projects"
                 className="btn-3d btn-primary-3d"
                 variants={buttonVariants}
                 whileHover="hover"
@@ -152,9 +152,9 @@ const Hero3D: React.FC = () => {
                 <span>Explore My Work</span>
                 <div className="btn-3d-glow"></div>
               </motion.a>
-              
-              <motion.a 
-                href="#contact" 
+
+              <motion.a
+                href="#contact"
                 className="btn-3d btn-secondary-3d"
                 variants={buttonVariants}
                 whileHover="hover"
@@ -167,9 +167,9 @@ const Hero3D: React.FC = () => {
           </motion.div>
         </div>
       </div>
-      
+
       <div className="scroll-indicator">
-        <motion.div 
+        <motion.div
           className="scroll-arrow"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

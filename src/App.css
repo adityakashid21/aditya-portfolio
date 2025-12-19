@@ -2,32 +2,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Color Palette */
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
-  
+  /* Mobile App Theme Palette */
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  /* Deep Slate */
+  --secondary-gradient: linear-gradient(135deg, #334155 0%, #475569 100%);
+  --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  /* Sky Blue to Indigo */
+  --dark-gradient: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+  /* Very Dark Slate */
+
   /* Colors */
-  --primary-color: #667eea;
-  --secondary-color: #f093fb;
-  --accent-color: #00f2fe;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.8);
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #1a1a2e;
-  --bg-tertiary: #16213e;
-  
+  --primary-color: #38bdf8;
+  /* Sky Blue */
+  --secondary-color: #818cf8;
+  /* Indigo */
+  --accent-color: #22d3ee;
+  /* Cyan */
+  --text-primary: #f8fafc;
+  /* Slate 50 */
+  --text-secondary: #cbd5e1;
+  /* Slate 300 */
+  --text-muted: #94a3b8;
+  /* Slate 400 */
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+
   /* Glass Morphism */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(56, 189, 248, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
   /* Spacing */
   --section-padding: 6rem 0;
-  --container-padding: 0 2rem;
-  
+  --container-padding: 0 1.5rem;
+
   /* Animations */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -68,7 +77,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
@@ -132,29 +141,51 @@ body::before {
 
 /* Advanced Animations */
 @keyframes pulse-glow {
-  0%, 100% { 
+
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.1;
   }
-  50% { 
+
+  50% {
     transform: translate(-50%, -50%) scale(1.2);
     opacity: 0.2;
   }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes slideInUp {
@@ -162,6 +193,7 @@ body::before {
     opacity: 0;
     transform: translateY(50px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -173,6 +205,7 @@ body::before {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -184,6 +217,7 @@ body::before {
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -195,6 +229,7 @@ body::before {
     opacity: 0;
     transform: scale(0.8);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -206,6 +241,7 @@ body::before {
     opacity: 0;
     transform: rotate(-180deg) scale(0.5);
   }
+
   to {
     opacity: 1;
     transform: rotate(0deg) scale(1);
@@ -217,13 +253,16 @@ body::before {
     opacity: 0;
     transform: scale(0.3);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.05);
   }
+
   70% {
     transform: scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -231,13 +270,26 @@ body::before {
 }
 
 @keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blink {
-  0%, 50% { border-color: transparent; }
-  51%, 100% { border-color: var(--accent-color); }
+
+  0%,
+  50% {
+    border-color: transparent;
+  }
+
+  51%,
+  100% {
+    border-color: var(--accent-color);
+  }
 }
 
 /* Utility Classes */
@@ -452,7 +504,7 @@ section::before {
     --section-padding: 4rem 0;
     --container-padding: 0 1rem;
   }
-  
+
   .section-title {
     margin-bottom: 2rem;
   }
@@ -461,48 +513,5 @@ section::before {
 @media (max-width: 480px) {
   :root {
     --section-padding: 3rem 0;
-  }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-}
-
-.App {
-  text-align: center;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Section spacing */
-section {
-  padding: 80px 0;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  section {
-    padding: 60px 0;
-  }
-  
-  .container {
-    padding: 0 15px;
   }
 }
