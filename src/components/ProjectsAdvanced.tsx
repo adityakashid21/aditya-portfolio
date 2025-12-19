@@ -10,9 +10,9 @@ import './ProjectsAdvanced.css';
 const GraduationCapIcon = () => <FaGraduationCap />;
 const ChalkboardTeacherIcon = () => <FaChalkboardTeacher />;
 const HandshakeIcon = () => <FaHandshake />;
-const RestaurantIcon = () => <MdRestaurant /> as any;
-const FitnessIcon = () => <MdFitnessCenter /> as any;
-const FastfoodIcon = () => <MdFastfood /> as any;
+const RestaurantIcon: React.FC = () => <>{MdRestaurant({})}</>;
+const FitnessIcon: React.FC = () => <>{MdFitnessCenter({})}</>;
+const FastfoodIcon: React.FC = () => <>{MdFastfood({})}</>;
 
 interface Project {
   title: string;
