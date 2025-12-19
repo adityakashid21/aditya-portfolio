@@ -1,8 +1,8 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaGraduationCap, FaChalkboardTeacher, FaHandshake, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGraduationCap, FaChalkboardTeacher, FaHandshake } from 'react-icons/fa';
 import { MdRestaurant, MdFitnessCenter, MdFastfood } from 'react-icons/md';
 import './ProjectsAdvanced.css';
 
@@ -10,9 +10,9 @@ import './ProjectsAdvanced.css';
 const GraduationCapIcon = () => <FaGraduationCap />;
 const ChalkboardTeacherIcon = () => <FaChalkboardTeacher />;
 const HandshakeIcon = () => <FaHandshake />;
-const RestaurantIcon = () => <MdRestaurant />;
-const FitnessIcon = () => <MdFitnessCenter />;
-const FastfoodIcon = () => <MdFastfood />;
+const RestaurantIcon = () => <MdRestaurant /> as any;
+const FitnessIcon = () => <MdFitnessCenter /> as any;
+const FastfoodIcon = () => <MdFastfood /> as any;
 
 interface Project {
   title: string;
