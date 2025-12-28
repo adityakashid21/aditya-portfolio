@@ -1,6 +1,7 @@
 /* Advanced Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+
 :root {
   /* Mobile App Theme Palette */
   --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
