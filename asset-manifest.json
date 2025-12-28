@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/aditya-portfolio/static/css/main.11d12dd3.css",
+    "main.js": "/aditya-portfolio/static/js/main.b1b2e143.js",
+    "index.html": "/aditya-portfolio/index.html",
+    "main.11d12dd3.css.map": "/aditya-portfolio/static/css/main.11d12dd3.css.map",
+    "main.b1b2e143.js.map": "/aditya-portfolio/static/js/main.b1b2e143.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.11d12dd3.css",
+    "static/js/main.b1b2e143.js"
+  ]
+}
